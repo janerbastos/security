@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
@@ -30,13 +30,15 @@ def _login(request):
 @login_required(login_url='/security/login/')
 def _logout(request):
     messages.success(request, 'Sessão encerrada com sucesso.', 'alert-success')
-    _logout(request)
+    logout(request)
     try:
-        del request.session['permissao']
+        pass
+        #encerrar todas as sessões carregadas
+        #del request.session['permissao']
     except KeyError:
         pass
     _next = request.GET.get('next', None)
     if _next:
         return redirect(_next)
     else:
-        return redirect('manager:index')
+        return redirect('security:login')
