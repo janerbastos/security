@@ -4,6 +4,6 @@ from __future__ import unicode_literals
 from django.apps import AppConfig
 
 
-class SheradConfig(AppConfig):
+class SecurityConfig(AppConfig):
     name = 'security'
 
