@@ -1,0 +1,23 @@
+<div class="modal fade" id="reseta_senha_user" tabindex="-1" data-keyboard="false" data-backdrop="static">
+	<div class="modal-dialog">
+		<form action="" method="POST" id="frm">
+			<input type="hidden" name="_method" value="reset-pwd"/>
+			{% csrf_token %}
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Modificar Senha?</h4>
+				</div>
+
+				<div class="modal-body">
+					<span></span>
+                    <p></p>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-link" data-dismiss="modal">Fechar</button>
+					<button type="button" class="btn btn-primary" data-test="ok">Resetar senha</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
