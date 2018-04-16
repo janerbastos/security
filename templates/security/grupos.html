@@ -1,0 +1,44 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+
+{% block titulo %} {{ block.super }} - {{ action }} {% endblock titulo %}
+
+{% block content %}
+
+    <div class="box">
+        <div class="box-header with-border">
+          <h4 class="box-title">
+              Lista de {{ action }}
+          </h4>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fa fa-minus"></i></button>
+          </div>
+        </div>
+        <div class="box-body">
+            {% if objects %}
+                <table class="table">
+                    <thead>
+                    <th>Nome</th>
+                    <th>&nbsp;</th>
+                    </thead>
+                    <tbody>
+                        {% for item in objects %}
+                            <tr>
+                                <td>{{ item.grupo_name }}</td>
+                                <td>
+                                    <a href="{% url 'security:update_grupo' item.id %}" title="Editar"><i class="fa fa-edit"></i> </a>&nbsp;
+                                    <a href="#" title="Vincular site" data-toggle="modal"><i class="fa fa-sitemap"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Nenhum registro encontrado.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}
+
