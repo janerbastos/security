@@ -8,7 +8,7 @@ class GrupoForm(ModelForm):
 
     class Meta:
         model = Grupo
-        fields = ['grupo_name',]
+        fields = ['nome',]
         labels = {
-            'grupo_name' : 'Nome do grupo',
+            'nome' : 'Nome do grupo',
         }

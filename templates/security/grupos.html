@@ -26,7 +26,7 @@
                     <tbody>
                         {% for item in objects %}
                             <tr>
-                                <td>{{ item.grupo_name }}</td>
+                                <td>{{ item.nome }}</td>
                                 <td>
                                     <a href="{% url 'security:update_grupo' item.id %}" title="Editar"><i class="fa fa-edit"></i> </a>&nbsp;
                                     <a href="#" title="Vincular site" data-toggle="modal"><i class="fa fa-sitemap"></i></a>
