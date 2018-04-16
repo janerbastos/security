@@ -4,6 +4,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
+from security.processadores import user_proc, grupo_proc
+
 
 def _login(request):
     template = 'admin/login.html'
@@ -42,3 +44,31 @@ def _logout(request):
         return redirect(_next)
     else:
         return redirect('security:login')
+
+
+def create_update_user(request, user_id=None):
+    if user_id:
+        action = request.GET.get('action', None)
+        if not action:
+            action = 'update'
+        return user_proc.view(request, action=action, user_id=user_id)
+    else:
+        return user_proc.view(request, action='create')
+
+
+def list_user(request):
+    return user_proc.view(request, action='list')
+
+
+def create_update_grupo(request, grupo_id=None):
+    action = request.GET.get('action', None)
+    if grupo_id:
+        if not action:
+            action = 'update'
+        return grupo_proc.view(request, action=action, grupo_id=grupo_id)
+    else:
+        return grupo_proc.view(request, action='create')
+
+
+def list_grupo(request):
+    return grupo_proc.view(request, action='list')

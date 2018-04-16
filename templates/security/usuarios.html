@@ -1,0 +1,54 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+
+{% block titulo %} {{ block.super }} - {{ action }} {% endblock titulo %}
+
+{% block content %}
+
+    <div class="box">
+        <div class="box-header with-border">
+          <h4 class="box-title">
+              Lista de {{ action }}
+          </h4>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fa fa-minus"></i></button>
+          </div>
+        </div>
+        <div class="box-body">
+            {% if users %}
+                <table class="table">
+                    <thead>
+                    <th>Nome</th>
+                    <th>Username</th>
+                    <th>E-Mail</th>
+                    <th>&nbsp;</th>
+                    </thead>
+                    <tbody>
+                        {% for item in users %}
+                            <tr>
+                                <td>{{ item.get_full_name }}</td>
+                                <td>{{ item.username }}</td>
+                                <td>{{ item.email }}</td>
+                                <td>
+                                    <a href="{% url 'security:update_user' item.username %}" title="Editar"><i class="fa fa-edit"></i> </a>&nbsp;
+                                    <a href="#" title="Trocar Senha" data-toggle="modal"
+                                       data-target="#reseta_senha_user" data-username="{{ item.username }}" data-nome="{{ item.get_full_name }}" data-url="{% url 'security:list_user' %}"><i class="fa fa-key"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Nenhum registro encontrado.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    {% include 'modal/reseta_senha.html' %}
+{% endblock content %}
+
+{% block static_file_botton %}
+    <script src="{% static 'js/security.js' %}"></script>
+{% endblock static_file_botton %}
