@@ -67,3 +67,4 @@ class UserResetPassword(ModelForm):
             raise ValidationError('Os dois campos de senha não confirmão')
 
         return self.cleaned_data.get('pws', None)
+
