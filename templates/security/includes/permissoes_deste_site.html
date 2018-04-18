@@ -1,0 +1,26 @@
+<div class="modal fade" id="vincular_permissao_grupo" tabindex="-1" data-keyboard="false" data-backdrop="static">
+	<div class="modal-dialog">
+		<form action="" method="POST" id="frm">
+			<input type="hidden" name="_method" value="vincualar_user"/>
+			{% csrf_token %}
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Vincilar/Desvincular usuários deste site?</h4>
+				</div>
+
+				<div class="modal-body">
+                    <div style="border-bottom: 1px solid #ccc; margin-bottom: 1em;">
+                        <input type="checkbox" id="select_all"/>&nbsp;Selecionar tudo.
+                    </div>
+                    <span></span>
+                    <p></p>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-link" data-dismiss="modal">Fechar</button>
+					<button type="submit" class="btn btn-primary" id="btn-vincular-desvincular">Vincular usuario ao site</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
