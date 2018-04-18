@@ -1,4 +1,26 @@
-{% load bootstrap %}
-
-{% csrf_token %}
-{{ form|bootstrap }}
+{% load bootstrap security_tags %}
+{% if opcao == 'permissoes' %}
+    <ul>
+    {% for content in  contents_type %}
+        {% has_papel_by_tipo content papeis=papeis action=action %}
+    {% endfor %}
+    </ul>
+{% elif opcao == 'papeis' %}
+    {% if papeis %}
+    <li><p>
+        <span style="width: 80px; display: inline-table;"><strong>{{ tipo }}</strong>:</span>
+        {% for papel in papeis %}
+            <input type="checkbox" class="cbx" value="{{papel.id}}" name="papeis"> &nbsp;{{ papel.nome }}&nbsp;
+        {% endfor %}
+    </p></li>
+    {% endif %}
+{% elif opcao == 'list' %}
+    <li><p>
+        <span style="width: 80px; display: inline-table;"><strong>{{ tipo }}</strong>:</span>
+        {% for papel in papeis %}
+           {{ papel.nome }}&nbsp;
+        {% endfor %}
+    </p></li>
+{% else %}
+    {{ form|bootstrap }}
+{% endif %}
