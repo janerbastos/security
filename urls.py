@@ -2,9 +2,10 @@
 
 from django.conf.urls import url
 
-from security.views import _logout, _login, list_user, create_update_user, list_grupo, create_update_grupo
+from security.views import _logout, _login, list_user, create_update_user, list_grupo, create_update_grupo, _profile
 
 urlpatterns = [
+    url(r'^$', _profile, name='profile'),
     url(r'^login/$', _login, name='login'),
     url(r'^logout/$', _logout, name='logout'),
     url(r'^usuarios/$', list_user, name='list_user'),

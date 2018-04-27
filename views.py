@@ -4,7 +4,20 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
+from manager.models import UserSite
 from security.processadores import user_proc, grupo_proc
+
+
+@login_required(login_url='/security/login/')
+def _profile(request):
+    template = 'admin/lockscreen.html'
+    user = request.user
+    sites = UserSite.objects.filter(user=user)
+    context = {
+        'user': user,
+        'sites': sites,
+    }
+    return render(request, template, context)
 
 
 def _login(request):
@@ -21,7 +34,7 @@ def _login(request):
                 if _next:
                     return redirect(_next)
                 else:
-                    return redirect('manager:index')
+                    return redirect('security:profile')
             else:
                 messages.warning(request, 'Conta de usuário esta bloqueado para acessar o sistema.', 'alert-warning')
         else:
@@ -29,14 +42,15 @@ def _login(request):
 
     return render(request, template)
 
+
 @login_required(login_url='/security/login/')
 def _logout(request):
     messages.success(request, 'Sessão encerrada com sucesso.', 'alert-success')
     logout(request)
     try:
-        pass
         #encerrar todas as sessões carregadas
         #del request.session['permissao']
+        pass
     except KeyError:
         pass
     _next = request.GET.get('next', None)
